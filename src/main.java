@@ -26,6 +26,8 @@ public class main {
         boolean alive = true;
         String[] inventory = {"Dragon Sword", "Wooden Shield", "Leather Boots", "Healing potion"};
 
+        System.out.println(" ");
+
         System.out.println("==== Your stats ====");
         System.out.println("Name: " + name);
         System.out.println("class: " + choice);
@@ -34,6 +36,8 @@ public class main {
         System.out.println("XP: " + xp);
         System.out.println("gold: " + gold);
         System.out.println("alive: " + alive);
+
+        System.out.println(" ");
 
         System.out.println("==== Inventory ====");
         for (int i = 0; i < inventory.length; i++) {
