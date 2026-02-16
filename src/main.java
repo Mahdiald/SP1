@@ -9,11 +9,11 @@ public class main {
     double gold = 156.50;
     String[] inventory = {"Dragon Sword", "Wooden Shield", "Leather Boots", "Healing potion"};
 
+    String name = nameChoice();
+    String CCchoice = classChoice();
 
     void main() {
-        String name = nameChoice();
 
-        String CCchoice = classChoice();
 
         System.out.println(" ");
 
@@ -198,7 +198,6 @@ public class main {
         System.out.println(" ");
     }
 
-
     void printEnemyCombatStats(){
         System.out.println("---- Enemy Stats ----");
         System.out.println("Level: " + enemy1.level + "| Health: " + enemy1.currentHealth + "/" + enemy1.maxHealth);
@@ -206,14 +205,21 @@ public class main {
     }
 
     void inflectedDamage(int amount){
-        enemy1.currentHealth -= amount;
-        if (enemy1.currentHealth <= 0){
-            enemy1.isAlive=false;
-            System.out.println("You killed the enemy. You win!");
-        }else{
+
+        while (enemy1.isAlive == true){
+            enemy1.currentHealth -= amount;
+            if (enemy1.currentHealth <= 0) {
+                enemy1.isAlive = false;
+            }
             System.out.println("You dealt " + amount + " damage!");
+            if (enemy1.currentHealth < 0){
+                enemy1.currentHealth=0;
+            }
             printEnemyCombatStats();
+            takenDamage(50, CCchoice);
+            heal(25, name);
         }
+        System.out.println("You killed the enemy. You win!");
     }
 
 }
