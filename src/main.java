@@ -3,12 +3,13 @@ import java.util.Scanner;
 public class main {
     Scanner scan = new Scanner(System.in);
 
-    int currentHealth = 50;
+    int currentHealth = 100;
     int maxHealth = 100;
     int level = 5;
     int xp = 2300;
     double gold = 156.50;
     boolean isAlive = true;
+    int enemyHealth = 90;
     String[] inventory = {"Dragon Sword", "Wooden Shield", "Leather Boots", "Healing potion"};
 
 
@@ -27,9 +28,17 @@ public class main {
 
         System.out.println(" ");
 
-        System.out.println("==== Combat ====");
+        System.out.println("==== COMBAT ====");
+        System.out.println(" ");
+        printUserCombatStats();
+        printEnemyCombatStats();
         takenDamage(30, CCchoice);
-        heal(0, name);
+        heal(25, name);
+        System.out.println(" ");
+        printUserCombatStats();
+        inflectedDamage(50);
+
+
 
         System.out.println(" ");
 
@@ -55,6 +64,10 @@ public class main {
         }
 
         System.out.println("Health: " + getHealthPercentage() + "%");
+
+        System.out.println(" ");
+
+        playerStats(name, CCchoice);
 
     }
 
@@ -180,6 +193,29 @@ public class main {
     double getHealthPercentage(){
         double healthPercentage = (double) currentHealth /maxHealth *100;
         return healthPercentage;
+    }
+
+    void printUserCombatStats(){
+        System.out.println("---- Your Stats ----");
+        System.out.println("Level: " + level + "| Health: " + currentHealth + "/" + maxHealth + "| XP: " + xp);
+        System.out.println(" ");
+    }
+
+
+    void printEnemyCombatStats(){
+        System.out.println("---- Enemy Stats ----");
+        System.out.println("Level: " + 4 + "| Health: " + enemyHealth + "/" + 90 + "| XP: " + 1000);
+        System.out.println(" ");
+    }
+
+    void inflectedDamage(int amount){
+        enemyHealth -= amount;
+        if (enemyHealth <= 0){
+            System.out.println("You killed the enemy. You win!");
+        }else{
+            System.out.println("You dealt " + amount + " damage!");
+            printEnemyCombatStats();
+        }
     }
 
 }
