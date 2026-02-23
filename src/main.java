@@ -3,10 +3,9 @@ import java.util.Scanner;
 public class main {
     Scanner scan = new Scanner(System.in);
 
-    CharacterStats user1 = new CharacterStats(100, 100, 5, true);
+    CharacterStats user1 = new CharacterStats(100, 100, 5, true, 2300, 156.50);
     CharacterStats enemy1 = new CharacterStats(90, 90, 3, true);
-    int xp = 2300;
-    double gold = 156.50;
+
     String[] inventory = {"Dragon Sword", "Wooden Shield", "Leather Boots", "Healing potion"};
 
     String name = nameChoice();
@@ -33,7 +32,7 @@ public class main {
         heal(25, name);
         System.out.println(" ");
         printUserCombatStats();
-        inflectedDamage(50);
+        inflectedDamage(45);
 
 
 
@@ -113,8 +112,8 @@ public class main {
         System.out.println("class: You are a " + CCchoice);
         System.out.println("Level: " + user1.level);
         System.out.println("Health: " + user1.currentHealth + "/" +  user1.maxHealth);
-        System.out.println("XP: " + xp);
-        System.out.println("gold: " + gold);
+        System.out.println("XP: " + user1.xp);
+        System.out.println("gold: " + user1.gold);
         System.out.println("alive: " + user1.isAlive);
     }
 
@@ -137,31 +136,31 @@ public class main {
     }
 
     double addGold(double amount){
-        gold += amount;
+        user1.gold += amount;
         System.out.println("You gained " + amount + " gold!");
-        return gold;
+        return user1.gold;
 
     }
 
     boolean removeGold(double amount){
-        if (amount > gold){
+        if (amount > user1.gold){
             return false;
         }else{
-            gold -= amount;
+            user1.gold -= amount;
             return true;
         }
     }
 
     void addXP(int amount){
-        xp += amount;
-        if (xp > 1000){
+        user1.xp += amount;
+        if (user1.xp > 1000){
             System.out.println("Ready to level up!");
         }
     }
 
     void levelUp(){
-        while (xp > 1000){
-            xp -= 1000;
+        while (user1.xp > 1000){
+            user1.xp -= 1000;
             user1.level++;
             user1.maxHealth += 15;
         }
@@ -194,7 +193,7 @@ public class main {
 
     void printUserCombatStats(){
         System.out.println("---- Your Stats ----");
-        System.out.println("Level: " + user1.level + "| Health: " + user1.currentHealth + "/" + user1.maxHealth + "| XP: " + xp);
+        System.out.println("Level: " + user1.level + "| Health: " + user1.currentHealth + "/" + user1.maxHealth + "| XP: " + user1.xp);
         System.out.println(" ");
     }
 
@@ -212,6 +211,7 @@ public class main {
                 enemy1.isAlive = false;
             }
             System.out.println("You dealt " + amount + " damage!");
+            System.out.println(" ");
             if (enemy1.currentHealth < 0){
                 enemy1.currentHealth=0;
             }
